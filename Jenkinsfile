@@ -1,16 +1,14 @@
-pipeline {
-    agent any
-
-    stages {
-
-        stage('Test Environment') {
-            steps {
-                bat 'echo PATH=%PATH%'
-                bat 'where cmd'
-                bat 'where docker'
-                bat 'docker --version'
-            }
-        }
-
+stage('Debug Environment') {
+    steps {
+        bat '''
+            echo ===== PATH =====
+            echo %PATH%
+            echo ===== COMSPEC =====
+            echo %ComSpec%
+            echo ===== WHERE CMD =====
+            where cmd
+            echo ===== DIRECT CMD TEST =====
+            C:\\Windows\\System32\\cmd.exe /c echo CMD WORKS
+        '''
     }
 }
