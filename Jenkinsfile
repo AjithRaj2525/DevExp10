@@ -1,38 +1,16 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE = "ajithraj2525/exp10"
-    }
-
     stages {
 
-        stage('Build Docker Image') {
+        stage('Test Environment') {
             steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:latest")
-                }
+                bat 'echo PATH=%PATH%'
+                bat 'where cmd'
+                bat 'where docker'
+                bat 'docker --version'
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-creds') {
-                        docker.image("${DOCKER_IMAGE}:latest").push()
-                    }
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Image successfully built and pushed to Docker Hub'
-        }
-
-        failure {
-            echo 'Pipeline failed'
-        }
     }
 }
