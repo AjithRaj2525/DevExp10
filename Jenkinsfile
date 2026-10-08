@@ -7,12 +7,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/AjithRaj2525/DevExp10.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
