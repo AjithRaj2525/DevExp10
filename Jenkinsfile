@@ -1,12 +1,12 @@
 pipeline{
 	agent any
 	environment{
-		DOCKER_IMAGE = "Swaroop1910/images"
+		DOCKER_IMAGE = "ajithraj2525/exp10"
 	}
 	stages{
 		stage('Clone Repository'){
 			steps{
-				git 'https://github.com/Swaroop1910/Jk1.git'
+				git 'https://github.com/AjithRaj2525/DevExp10.git'
 			}
 		}
 	stage('Build Docker Image'){
