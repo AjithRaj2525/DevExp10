@@ -32,7 +32,7 @@ pipeline {
                 ]) {
                     bat '''
                         @echo off
-                        echo %DOCKER_PAT% | docker login -u %DOCKER_USERNAME% --password-stdin
+                        echo %DOCKER_PAT% | docker login -u %ajithraj2525% --password-stdin
                     '''
                 }
             }
