@@ -1,11 +1,14 @@
+```groovy
 pipeline {
     agent any
 
     environment {
         DOCKER_IMAGE = "ajithraj2525/exp10"
+        DOCKER_USERNAME = "ajithraj2525"
     }
 
     stages {
+
         stage('Clone Repository') {
             steps {
                 git branch: 'main',
@@ -21,14 +24,15 @@ pipeline {
 
         stage('Login to Docker Hub') {
             steps {
-                withCredentials([string(
-                    credentialsId: 'dockerhub-PAT',
-                    variable: 'DOCKER_PAT'
-                )]) {
+                withCredentials([
+                    string(
+                        credentialsId: 'dockerhub-PAT',
+                        variable: 'DOCKER_PAT'
+                    )
+                ]) {
                     bat '''
-                    @echo off
-                    echo %DOCKER_PAT%|docker login -u ajithraj2525 --password-stdin
-                   if errorlevel 1 exit /b 1
+                        @echo off
+                        echo %DOCKER_PAT% | docker login -u %DOCKER_USERNAME% --password-stdin
                     '''
                 }
             }
@@ -45,8 +49,10 @@ pipeline {
         success {
             echo 'Docker image built and pushed successfully.'
         }
+
         failure {
             echo 'Pipeline failed. Check Console Output.'
         }
     }
 }
+```
